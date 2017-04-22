@@ -26,10 +26,12 @@ RUN \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
 # Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+RUN apt-get update && apt-get install -y curl && \
+    curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
 # Install PHPUnit
-RUN curl https://phar.phpunit.de/phpunit.phar > phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
+RUN apt-get update && apt-get install -y curl && \
+    curl https://phar.phpunit.de/phpunit.phar > phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
 
 # Install yarn
 RUN apt-get update && apt-get install -y curl apt-transport-https && \
