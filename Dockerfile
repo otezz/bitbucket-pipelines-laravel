@@ -33,6 +33,11 @@ RUN apt-get update && apt-get install -y curl && \
 RUN apt-get update && apt-get install -y curl && \
     curl https://phar.phpunit.de/phpunit.phar > phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
 
+# Install NodeJS
+RUN apt-get update && apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+    apt-get install -y nodejs
+
 # Install yarn
 RUN apt-get update && apt-get install -y curl apt-transport-https && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
