@@ -22,7 +22,7 @@ RUN ["/bin/bash", "-c", "bash /setup-mariadb.sh"]
 RUN \
   apt-get update && \
   apt-get install -y git zip && \
-  apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php7.0-xdebug php7.0-zip php7.0-xml && \
+  apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php-xdebug php7.0-zip php7.0-xml && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
 # Install composer
@@ -30,6 +30,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --in
 
 # Install PHPUnit
 RUN curl https://phar.phpunit.de/phpunit.phar > phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
+
+# Install yarn
+RUN apt-get update && apt-get install -y curl apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn
 
 # Clean up
 RUN \
