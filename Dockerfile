@@ -25,6 +25,15 @@ RUN \
   apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php-xdebug php7.0-zip php7.0-xml && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
+# Install Laravel Dusk support
+RUN \
+  apt-get update && \
+  apt-get install -y chromium-browser libxpm4 libxrender1 libgtk2.0-0 libnss3 \
+    libnss3-dev libxi6 libgconf-2-4 xvfb gtk2-engines-pixbuf \
+    xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable \
+    imagemagick x11-apps && \
+  apt-get autoclean && apt-get clean && apt-get autoremove
+
 # Install composer
 RUN apt-get update && apt-get install -y curl && \
     curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
