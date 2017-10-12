@@ -10,7 +10,7 @@ ENV MYSQL_ROOT_PASSWORD root
 # Update, Fix Language and install Build Essesntial
 RUN \
  apt-get update && apt-get -y upgrade &&\
- apt-get install -y --no-install-recommends locales build-essential &&\
+ apt-get install -y --no-install-recommends locales build-essential apt-utils &&\
  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen &&\
  locale-gen en_US.UTF-8 &&\
  /usr/sbin/update-locale LANG=en_US.UTF-8
@@ -20,9 +20,11 @@ RUN ["/bin/bash", "-c", "bash /setup-mariadb.sh"]
 
 # Install PHP
 RUN \
+  LC_ALL=C.UTF-8 add-apt-repository -y -u ppa:ondrej/php && \
   apt-get update && \
   apt-get install -y git zip && \
-  apt-get install -y php7.0-mysqlnd php7.0-cli php7.0-sqlite php7.0-mbstring php7.0-mcrypt php7.0-curl php7.0-intl php7.0-gd php-xdebug php7.0-zip php7.0-xml && \
+  apt-get install -y php7.1 php7.1-cli php7.1-common php7.1-curl php7.1-dev php7.1-fpm php7.1-json php7.1-mbstring php7.1-mcrypt \
+    php7.1-mysql php7.1-opcache php7.1-readline php7.1-sqlite3 php7.1-xml php7.1-zip php7.1-intl php7.1-gd php-xdebug && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
 # Install Laravel Dusk support
