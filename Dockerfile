@@ -24,7 +24,7 @@ RUN \
   apt-get update && \
   apt-get install -y git zip && \
   apt-get install -y php7.1 php7.1-cli php7.1-common php7.1-curl php7.1-dev php7.1-fpm php7.1-json php7.1-mbstring php7.1-mcrypt \
-    php7.1-mysql php7.1-opcache php7.1-readline php7.1-sqlite3 php7.1-xml php7.1-zip php7.1-intl php7.1-gd php-xdebug && \
+    php7.1-mysql php7.1-opcache php7.1-readline php7.1-sqlite3 php7.1-xml php7.1-zip php7.1-intl php7.1-gd php-mongodb php-xdebug && \
   apt-get autoclean && apt-get clean && apt-get autoremove
 
 # Install Laravel Dusk support
